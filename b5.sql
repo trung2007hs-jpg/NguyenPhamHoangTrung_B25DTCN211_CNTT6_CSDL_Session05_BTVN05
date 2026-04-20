@@ -15,10 +15,11 @@ INSERT INTO Users (user_name, total_orders) VALUES
 
 -- Query phân loại
 SELECT 
-    user_name AS Ten_Khach_Hang,
+    user_name,
     CASE
-        WHEN COALESCE(total_orders, 0) > 500 THEN 'Kim Cương'
-        WHEN COALESCE(total_orders, 0) BETWEEN 100 AND 500 THEN 'Vàng'
+        WHEN total_orders IS NULL THEN 'Bạc'
+        WHEN total_orders > 500 THEN 'Kim Cương'
+        WHEN total_orders >= 100 THEN 'Vàng'
         ELSE 'Bạc'
-    END AS Xep_Hang
+    END AS 'rank'
 FROM Users;
